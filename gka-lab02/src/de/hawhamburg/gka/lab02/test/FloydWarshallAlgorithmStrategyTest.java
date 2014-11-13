@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.jgrapht.Graph;
 import org.jgrapht.GraphPath;
 import org.junit.After;
 import org.junit.Before;
@@ -12,6 +13,7 @@ import org.junit.Test;
 
 import de.hawhamburg.gka.common.CustomEdge;
 import de.hawhamburg.gka.common.GraphParser;
+import de.hawhamburg.gka.lab02.BigGraphGenerator;
 import de.hawhamburg.gka.lab02.FloydWarshall;
 
 public class FloydWarshallAlgorithmStrategyTest {
@@ -64,6 +66,18 @@ public class FloydWarshallAlgorithmStrategyTest {
 		}
 		
 		assertTrue (hasFirst && hasSecond);
+	}
+	
+	@Test
+	public void testBigGraph () {
+		Graph<String, CustomEdge> graph = BigGraphGenerator.generate (1000, 6000);
+		
+		FloydWarshall fw = new FloydWarshall ();
+		GraphPath<String, CustomEdge> path =
+			fw.getPath (graph, "v1", "v433");
+		
+		assertNotNull (path);
+		assertTrue (path.getGraph ().vertexSet ().size () > 0);
 	}
 
 }
