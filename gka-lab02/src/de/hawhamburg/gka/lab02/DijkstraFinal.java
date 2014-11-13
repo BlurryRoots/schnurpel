@@ -55,15 +55,25 @@ implements IPathfinder {
 				for (CustomEdge edge : graph.edgesOf (current.name)) {
 					++this.accessCount;
 					
-					WeightedVertex end = new WeightedVertex (
+					WeightedVertex to = new WeightedVertex (
 						edge.getTarget (),
 						current,
 						0
 					);
 					
-					if (! set.contains (end)) {
-						set.add (end);
-						queue.add (end);
+					if (! set.contains (to)) {
+						if (to.cost + edge.getCost () < to.cost) {
+							WeightedVertex newTo = new WeightedVertex (to.name, current, to.cost + edge.getCost ());
+							set.remove (to);
+							queue.remove (to);
+							
+							set.add (newTo);
+							queue.add (newTo);
+						}
+						else {
+							set.add (to);
+							queue.add (to);
+						}
 					}
 				}
 			}
