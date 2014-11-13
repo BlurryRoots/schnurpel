@@ -23,7 +23,8 @@ implements IPathfinder {
 	int accessCount;
 	
 	public
-	GraphPath<String, CustomEdge> getPath (Graph<String, CustomEdge> graph, String source, String target) {
+	GraphPath<String, CustomEdge> getPath (
+		Graph<String, CustomEdge> graph, String source, String target) {
 
 		this.accessCount = 0;
 		
@@ -74,9 +75,9 @@ implements IPathfinder {
 					
 					// either choose weight of edge, or reset it to max value if there
 					// are no edges
-					int ec = graph.getAllEdges(xName, vertices.get(y)).size();
+					int ec = graph.getAllEdges (xName, yName).size();
 					cost = 0 < ec
-						? graph.getEdge(xName, vertices.get(y)).getCost()
+						? graph.getEdge (xName, vertices.get(y)).getCost()
 						: cost;
 				}
 				
