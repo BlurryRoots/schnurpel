@@ -59,7 +59,8 @@ class EntryPoint {
 
 		//
 //		FloydWarshall s = new FloydWarshall ();
-		DijkstraAlternative s = new DijkstraAlternative ();
+//		DijkstraAlternative s = new DijkstraAlternative ();
+		DijkstraFinal s = new DijkstraFinal ();
 		GraphPath<String, CustomEdge> spath = s.getPath (graph, o.source, o.target);
 		System.out.println ("My path: " + spath);
 	}

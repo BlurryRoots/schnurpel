@@ -83,74 +83,9 @@ public class Dijkstra implements IPathfinder {
 		System.out.println ("vi " + visited);
 		System.out.println ("di " + distance);
 		
-//		List<String> queue = new LinkedList<String> ();
-//		Map<String, WeightedVertex> visitMap = new HashMap<String, WeightedVertex> ();
-//
-//		visitMap.put (source, new WeightedVertex (source, null, 0));
-//		queue.add (source);
-//
-//		while (! queue.isEmpty ()) {
-//			String current = queue.remove (0);
-//			WeightedVertex node = visitMap.get (current);
-//			Set<CustomEdge> edges = graph.edgesOf (current); 
-//
-//			for (CustomEdge e : edges) {
-//				++this.accessCount;
-//				
-//				String to = e.getTarget ();
-//				if (to.equals (current)) {
-//					to = e.getSource ();
-//				}
-//
-//				int updatedCost = node.cost + e.getCost ();
-//				if (! visitMap.containsKey (to)) {
-//					System.out.println ("Adding to map " + to);
-//					visitMap.remove (to);
-//					visitMap.put (to,
-//							new WeightedVertex (to, node, updatedCost));
-//					queue.add (to);
-//				}
-//				else {
-//					WeightedVertex wv = visitMap.get (to);
-//					if (wv.cost > updatedCost) {
-//						visitMap.remove (to);
-//						visitMap.put (to, new WeightedVertex (to, node,
-//								updatedCost));
-//					}
-//
-//				}
-//			}
-//		}
-//
-//		List<CustomEdge> edges = new LinkedList<CustomEdge> ();
-//
-//		if (!visitMap.containsKey (target)) {
-//			System.out.println ("FUUUK");
-//			return new GraphPathImpl<String, CustomEdge> (graph, source,
-//					target, edges, 1);
-//		}
-//
-//		List<String> path = new LinkedList<String> ();
-//		WeightedVertex current = visitMap.get (target);
-//		while (null != current) {
-//			path.add (current.name);
-//			current = visitMap.get (current.parent);
-//		}
-//		Collections.reverse (path);
-//
-//		for (int i = 0; i < path.size () - 1; ++i) {
-//			++this.accessCount;
-//			edges.add (graph.getEdge (path.get (i), path.get (i + 1)));
-//		}
-
-//		return new GraphPathImpl<String, CustomEdge> (graph, source, target,
-//				edges, 1);
 		return null;
 	}
-	
-//	getNodeWithLowestDistance(UnSettledNodes){
-//	  find the node with the lowest distance in UnSettledNodes and return it 
-//	}
+
 	private
 	Entry<String, Integer> findNodeWithLowestDistance (Map<String, Integer> distance) {
 		Entry<String, Integer> lowest = null;

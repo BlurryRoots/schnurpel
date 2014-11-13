@@ -1,7 +1,5 @@
 package de.hawhamburg.gka.lab02.test;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -9,13 +7,14 @@ import org.jgrapht.GraphPath;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
 import de.hawhamburg.gka.common.CustomEdge;
 import de.hawhamburg.gka.common.GraphParser;
-import de.hawhamburg.gka.lab02.FloydWarshall;
+import de.hawhamburg.gka.lab02.DijkstraFinal;
 
-public class FloydWarshallAlgorithmStrategyTest {
-
+public class DijkstraTest {
+	
 	private final
 	String testGraphSource = 
 		"Hanshausen -- Karlstadt (A42) : 42;\n" +
@@ -37,16 +36,13 @@ public class FloydWarshallAlgorithmStrategyTest {
 
 	@Test
 	public void testGetPath () {
-		FloydWarshall fw = new FloydWarshall ();		
+		DijkstraFinal dijkstra = new DijkstraFinal ();		
 		GraphParser parser = new GraphParser (testGraphSource);
 		
 		GraphPath<String, CustomEdge> path =
-			fw.getPath (parser.getGraph (), "Ottofeld", "Karlstadt");
+			dijkstra.getPath (parser.getGraph (), "Ottofeld", "Karlstadt");
 
-		assertEquals (path.getGraph ().vertexSet ().size (), 3);
 		assertEquals (new String [] {"Hanshausen", "Karlstadt", "Ottofeld"}, path.getGraph ().vertexSet ().toArray (new String [0]));
-		
-		assertEquals (path.getGraph ().vertexSet ().size (), 3);
 	}
 
 }
