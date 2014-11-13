@@ -1,6 +1,6 @@
 package de.hawhamburg.gka.lab02.test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -44,9 +44,26 @@ public class FloydWarshallAlgorithmStrategyTest {
 			fw.getPath (parser.getGraph (), "Ottofeld", "Karlstadt");
 
 		assertEquals (path.getGraph ().vertexSet ().size (), 3);
-		assertEquals (new String [] {"Hanshausen", "Karlstadt", "Ottofeld"}, path.getGraph ().vertexSet ().toArray (new String [0]));
+		assertEquals (
+			new String [] {"Hanshausen", "Karlstadt", "Ottofeld"}, 
+			path.getGraph ().vertexSet ().toArray (new String [0])
+		);
 		
-		assertEquals (path.getGraph ().vertexSet ().size (), 3);
+		boolean hasFirst = false, hasSecond = false;
+		for (CustomEdge edge : path.getEdgeList ()) {
+			System.out.println (edge.getSource () + " to " + edge.getTarget ());
+			if (edge.getSource ().equals ("Hanshausen") &&
+				edge.getTarget ().equals ("Ottofeld")) {
+				hasFirst = true;
+			}
+			
+			if (edge.getSource ().equals ("Hanshausen") &&
+				edge.getTarget ().equals ("Karlstadt")) {
+				hasSecond = true;
+			}
+		}
+		
+		assertTrue (hasFirst && hasSecond);
 	}
 
 }
