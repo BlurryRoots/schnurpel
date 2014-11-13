@@ -21,7 +21,8 @@ implements IPathfinder {
 	@Override
 	public GraphPath<String, CustomEdge> getPath (
 			Graph<String, CustomEdge> graph, String source, String target) {
-		// 
+		
+		this.accessCount = 0;
 		// path to be found
 		List<String> path = new LinkedList<String> ();
 		
@@ -79,6 +80,7 @@ implements IPathfinder {
 			));
 		}
 		
+		System.out.println ("Dijkstra needed " + this.accessCount + " access calls.");
 		return new GraphPathImpl<String, CustomEdge> (graph, source, target, edges, 1);
 	}
 

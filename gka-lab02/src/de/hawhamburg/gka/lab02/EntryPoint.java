@@ -31,9 +31,6 @@ class EntryPoint {
 	    
 	    @Parameter(names = { "-t", "--target" }, description = "Target node")
 	    public String target;
-
-	    // @DynamicParameter(names = "-D", description = "Dynamic parameters go here")
-	    // public Map<String, String> dynamicParams = new HashMap<String, String>();
 	}
 	
 	public static
@@ -48,14 +45,6 @@ class EntryPoint {
 		GraphParser parser = ParserBuilder.createFromFile (filename);
 		Graph<String, CustomEdge> graph = parser.getGraph (); 
 		System.out.println (graph);
-		
-		//
-//		FloydWarshallShortestPaths<String, CustomEdge> algo =
-//			new FloydWarshallShortestPaths<String, CustomEdge> (graph);
-//		GraphPath<String, CustomEdge> path = algo.getShortestPath (o.source, o.target);
-//		for (GraphPath<String, CustomEdge> path : algo.getShortestPaths ()) {
-//			System.out.println ("Lib path: " + path + " - " + path.getWeight ());			
-//		}
 
 		//
 //		FloydWarshall s = new FloydWarshall ();

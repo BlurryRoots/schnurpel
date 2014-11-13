@@ -46,8 +46,7 @@ implements IPathfinder {
 		GraphPathImpl<String, CustomEdge> pathGraph = 
 				new GraphPathImpl<String, CustomEdge> (graph, source, target, edges, 1);
 		
-		System.out.println ("FloydWarshall had " + this.accessCount + " graph access calls.");
-		
+		System.out.println ("FloydWarshall had " + this.accessCount + " graph access calls.");		
 		return pathGraph;
 	}
 	
