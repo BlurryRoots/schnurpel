@@ -1,13 +1,16 @@
 package de.hawhamburg.gka.lab02.test;
 
+import static org.junit.Assert.*;
+
 import java.util.HashSet;
 import java.util.Set;
 
+import org.jgrapht.Graph;
 import org.jgrapht.GraphPath;
+import org.jgrapht.graph.SimpleGraph;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 import de.hawhamburg.gka.common.CustomEdge;
 import de.hawhamburg.gka.common.GraphParser;
@@ -21,13 +24,17 @@ public class DijkstraTest {
 		"Hanshausen -- Ottofeld (B1337) : 200;";
 	
 	private final
-	Set<String> vertices = new HashSet<String> ();
+	Graph<String, CustomEdge> expectedGraph =
+		new SimpleGraph<String, CustomEdge> (CustomEdge.class);
 
 	@Before
-	public void setUp () throws Exception {
-		vertices.add ("Hanshausen");
-		vertices.add ("Karlstadt");
-		vertices.add ("Ottofeld");
+	public void setUp () throws Exception {		
+		expectedGraph.addVertex ("Hanshausen");
+		expectedGraph.addVertex ("Karlstadt");
+		expectedGraph.addVertex ("Ottofeld");
+		
+		expectedGraph.addEdge ("Hanshausen", "Karlstadt", new CustomEdge ("A42", 42));
+		expectedGraph.addEdge ("Hanshausen", "Ottofeld", new CustomEdge ("B1337", 200));
 	}
 
 	@After
@@ -39,10 +46,12 @@ public class DijkstraTest {
 		DijkstraFinal dijkstra = new DijkstraFinal ();		
 		GraphParser parser = new GraphParser (testGraphSource);
 		
+		assertEquals (expectedGraph, parser.getGraph ());
+		
 		GraphPath<String, CustomEdge> path =
 			dijkstra.getPath (parser.getGraph (), "Ottofeld", "Karlstadt");
 
-		assertEquals (new String [] {"Hanshausen", "Karlstadt", "Ottofeld"}, path.getGraph ().vertexSet ().toArray (new String [0]));
+		assertEquals (expectedGraph, path);
 	}
 
 }
