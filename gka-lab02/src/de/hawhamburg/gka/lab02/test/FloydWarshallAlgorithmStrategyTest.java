@@ -13,7 +13,7 @@ import org.junit.Test;
 
 import de.hawhamburg.gka.common.CustomEdge;
 import de.hawhamburg.gka.common.GraphParser;
-import de.hawhamburg.gka.lab02.BigGraphGenerator;
+import de.hawhamburg.gka.lab02.GraphGenerator;
 import de.hawhamburg.gka.lab02.FloydWarshall;
 
 public class FloydWarshallAlgorithmStrategyTest {

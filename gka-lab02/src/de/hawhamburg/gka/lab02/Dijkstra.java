@@ -8,13 +8,11 @@ import java.util.Map;
 import java.util.Set;
 
 import org.jgrapht.Graph;
-import org.jgrapht.GraphPath;
-import org.jgrapht.graph.GraphPathImpl;
 
 import de.hawhamburg.gka.common.CustomEdge;
 import de.hawhamburg.gka.common.IPathfinder;
 
-public class DijkstraFinal
+public class Dijkstra
 implements IPathfinder {
 
 	@Override public
@@ -138,9 +136,6 @@ implements IPathfinder {
 		
 		public
 		int cost;
-		
-		public
-		boolean isCostMaxiumum;
 		
 		public
 		boolean isVisited;
