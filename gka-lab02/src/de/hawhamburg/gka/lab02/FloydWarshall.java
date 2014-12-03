@@ -42,15 +42,12 @@ implements IPathfinder {
 		
 		this.calculatePossiblePaths (graph, distances, transitions);
 		
-		List<CustomEdge> edges =
+		List<String> path =
 			this.createResult (graph, distances, transitions, source, target);
-		GraphPathImpl<String, CustomEdge> pathGraph = 
-				new GraphPathImpl<String, CustomEdge> (graph, source, target, edges, 1);
 		
 		System.out.println ("FloydWarshall had " + this.accessCount + " graph access calls.");
 		
-		// TODO: build path list
-		return null;
+		return path;
 	}
 	
 	private
@@ -97,25 +94,22 @@ implements IPathfinder {
 	}
 	
 	private
-	List<CustomEdge> createResult (
+	List<String> createResult (
 			Graph<String, CustomEdge> graph,
 			Matrix<Integer> distances,
 			Matrix<Integer> transitions,
 			String source, String target) {
 
 		List<String> vertices = new ArrayList<String> (graph.vertexSet ());
-		
-		List<CustomEdge> result =
-			new LinkedList<CustomEdge> (); 
+		List<String> stopovers = new ArrayList<String> (); 
 		
 		if (NO_TRANSITION == transitions.retrieve (
 				vertices.indexOf(source),
 				vertices.indexOf(target)
 			)) {
-			return result;
+			return stopovers;
 		}
 
-		List<String> stopovers = new ArrayList<String> ();
 		stopovers.add (source);
 		stopovers.add (target);
 		
@@ -139,16 +133,7 @@ implements IPathfinder {
 			run = c != stopovers.size ();
 		}
 		
-		for (int i = 0; i < stopovers.size () - 1; ++i) {
-			++this.accessCount;
-			
-			result.add (graph.getEdge (
-				stopovers.get (i),
-				stopovers.get (i + 1)
-			));
-		}
-		
-		return result;
+		return stopovers;
 	}
 	
 	private
