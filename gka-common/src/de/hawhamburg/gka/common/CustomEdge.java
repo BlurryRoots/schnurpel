@@ -45,12 +45,14 @@ class CustomEdge
 	
 	public
 	String getSource () {
-		return super.getSource ().toString ();
+		String s = (String)super.getSource ();
+		return null != s ? s.toString () : null;
 	}
 	
 	public
 	String getTarget () {
-		return super.getTarget ().toString ();
+		String s = (String)super.getTarget ();
+		return null != s ? s.toString () : null;
 	}
 	
 	@Override
@@ -83,9 +85,15 @@ class CustomEdge
 		}
 		
 		CustomEdge other = (CustomEdge)o;
+		boolean equalSource = null != this.getSource ()
+			? this.getSource ().equals (other.getSource ())
+			: null == other.getSource ();
+		boolean equalTarget = null != this.getTarget ()
+			? this.getTarget ().equals (other.getTarget ())
+			: null == other.getTarget ();
+			
 		return
-			this.getSource ().equals (other.getSource ()) &&
-			this.getTarget ().equals (other.getTarget ()) &&
+			equalSource && equalTarget &&
 			this.getName ().equals (other.getName ()) &&
 			this.getCost () == other.getCost ();
 	}

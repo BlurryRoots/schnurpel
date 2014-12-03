@@ -31,8 +31,8 @@ public class Matrix <T> {
 		return this.raw.get (column).get (row);
 	}
 	
-	@Override
-	public String toString () {
+	@Override public
+	String toString () {
 		StringBuilder builder = new StringBuilder ();
 		
 		for (ArrayList<T> column : this.raw) {
