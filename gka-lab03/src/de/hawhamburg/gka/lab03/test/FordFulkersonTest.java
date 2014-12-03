@@ -10,14 +10,22 @@ import org.junit.Test;
 
 import de.hawhamburg.gka.common.CustomEdge;
 import de.hawhamburg.gka.common.GraphParser;
+import de.hawhamburg.gka.lab03.EdmondsKarpFlow;
 import de.hawhamburg.gka.lab03.FordFulkerson;
 
 public class FordFulkersonTest {
 
 	private final
 	String testGraphSource = 
-		"Hanshausen -- Karlstadt (A42) : 42;\n" +
-		"Hanshausen -- Ottofeld (B1337) : 200;";
+		"q -- v1 (A) : 5;\n" +
+		"q -- v5 (A) : 1;\n" +
+		"q -- v2 (A) : 4;\n" +
+		"v1 -- v3 (A) : 1;\n" +
+		"v1 -- s (A) : 3;\n" +
+		"v1 -- v5 (A) : 1;\n" +
+		"v2 -- v3 (A) : 2;\n" +
+		"v3 -- s (A) : 3;\n" +
+		"v5 -- s (A) : 3;\n";
 	
 	private final
 	Graph<String, CustomEdge> expectedGraph =
@@ -25,12 +33,22 @@ public class FordFulkersonTest {
 
 	@Before
 	public void setUp () throws Exception {
-		expectedGraph.addVertex ("Hanshausen");
-		expectedGraph.addVertex ("Karlstadt");
-		expectedGraph.addVertex ("Ottofeld");
-		
-		expectedGraph.addEdge ("Hanshausen", "Karlstadt", new CustomEdge ("A42", 42));
-		expectedGraph.addEdge ("Hanshausen", "Ottofeld", new CustomEdge ("B1337", 200));
+		expectedGraph.addVertex ("q");
+		expectedGraph.addVertex ("v1");
+		expectedGraph.addVertex ("v2");
+		expectedGraph.addVertex ("v3");
+		expectedGraph.addVertex ("v5");
+		expectedGraph.addVertex ("s");
+
+		expectedGraph.addEdge ("q", "v1", new CustomEdge ("A", 5));
+		expectedGraph.addEdge ("q", "v5", new CustomEdge ("A", 1));
+		expectedGraph.addEdge ("q", "v2", new CustomEdge ("A", 4));
+		expectedGraph.addEdge ("v1", "v3", new CustomEdge ("A", 1));
+		expectedGraph.addEdge ("v1", "s", new CustomEdge ("A", 3));
+		expectedGraph.addEdge ("v1", "v5", new CustomEdge ("A", 1));
+		expectedGraph.addEdge ("v2", "v3", new CustomEdge ("A", 2));
+		expectedGraph.addEdge ("v3", "s", new CustomEdge ("A", 3));
+		expectedGraph.addEdge ("v5", "s", new CustomEdge ("A", 3));
 	}
 
 	@After
@@ -44,8 +62,8 @@ public class FordFulkersonTest {
 		
 		assertEquals (expectedGraph, graph);
 		
-		FordFulkerson ff = new FordFulkerson (graph);
-		
+		EdmondsKarpFlow ekf = new EdmondsKarpFlow (graph);
+		assertEquals (8, ekf.maxFlow ("q", "s"));
 	}
 
 }
