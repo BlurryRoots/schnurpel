@@ -13,7 +13,7 @@ import de.hawhamburg.gka.common.GraphParser;
 import de.hawhamburg.gka.lab03.EdmondsKarpFlow;
 import de.hawhamburg.gka.lab03.FordFulkerson;
 
-public class FordFulkersonTest {
+public class EdmondsKarpFlowTest {
 
 	private final
 	String testGraphSource = 
