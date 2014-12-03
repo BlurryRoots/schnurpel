@@ -2,11 +2,12 @@ package de.hawhamburg.gka.lab02.test;
 
 import static org.junit.Assert.*;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.jgrapht.Graph;
 import org.jgrapht.GraphPath;
+import org.jgrapht.graph.GraphPathImpl;
 import org.jgrapht.graph.SimpleGraph;
 import org.junit.After;
 import org.junit.Before;
@@ -28,7 +29,7 @@ public class DijkstraTest {
 		new SimpleGraph<String, CustomEdge> (CustomEdge.class);
 
 	@Before
-	public void setUp () throws Exception {		
+	public void setUp () throws Exception {
 		expectedGraph.addVertex ("Hanshausen");
 		expectedGraph.addVertex ("Karlstadt");
 		expectedGraph.addVertex ("Ottofeld");
@@ -40,18 +41,26 @@ public class DijkstraTest {
 	@After
 	public void tearDown () throws Exception {
 	}
-
+	
 	@Test
 	public void testGetPath () {
+		final String source = "Ottofeld";
+		final String target = "Karlstadt";
 		DijkstraFinal dijkstra = new DijkstraFinal ();		
 		GraphParser parser = new GraphParser (testGraphSource);
+		Graph<String, CustomEdge> graph = parser.getGraph ();
 		
-		assertEquals (expectedGraph, parser.getGraph ());
+		assertEquals (expectedGraph, graph);
 		
-		GraphPath<String, CustomEdge> path =
-			dijkstra.getPath (parser.getGraph (), "Ottofeld", "Karlstadt");
-
-		assertEquals (expectedGraph, path);
+		List<String> expectedPath = new LinkedList<> ();
+		expectedPath.add ("Ottofeld");
+		expectedPath.add ("Hanshausen");
+		expectedPath.add ("Karlstadt");
+		
+		List<String> path = dijkstra.getPath (graph, source, target);
+		
+		System.out.println (expectedPath.hashCode () + " : " + path.hashCode ());
+		assertEquals (expectedPath, path);
 	}
 
 }

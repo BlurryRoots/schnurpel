@@ -1,6 +1,8 @@
 .metadata
 .recommenders
+gka-common/.gitignore
 gka-lab01/.gitignore
 gka-lab02/.gitignore
 jgraphx
+vsp03
 

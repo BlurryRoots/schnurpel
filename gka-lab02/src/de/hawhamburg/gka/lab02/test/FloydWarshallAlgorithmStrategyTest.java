@@ -41,31 +41,6 @@ public class FloydWarshallAlgorithmStrategyTest {
 	public void testGetPath () {
 		FloydWarshall fw = new FloydWarshall ();		
 		GraphParser parser = new GraphParser (testGraphSource);
-		
-		GraphPath<String, CustomEdge> path =
-			fw.getPath (parser.getGraph (), "Ottofeld", "Karlstadt");
-
-		assertEquals (path.getGraph ().vertexSet ().size (), 3);
-		assertEquals (
-			new String [] {"Hanshausen", "Karlstadt", "Ottofeld"}, 
-			path.getGraph ().vertexSet ().toArray (new String [0])
-		);
-		
-		boolean hasFirst = false, hasSecond = false;
-		for (CustomEdge edge : path.getEdgeList ()) {
-			System.out.println (edge.getSource () + " to " + edge.getTarget ());
-			if (edge.getSource ().equals ("Hanshausen") &&
-				edge.getTarget ().equals ("Ottofeld")) {
-				hasFirst = true;
-			}
-			
-			if (edge.getSource ().equals ("Hanshausen") &&
-				edge.getTarget ().equals ("Karlstadt")) {
-				hasSecond = true;
-			}
-		}
-		
-		assertTrue (hasFirst && hasSecond);
 	}
 	
 	@Test

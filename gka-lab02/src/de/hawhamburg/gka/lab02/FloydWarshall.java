@@ -23,7 +23,7 @@ implements IPathfinder {
 	int accessCount;
 	
 	public
-	GraphPath<String, CustomEdge> getPath (
+	List<String> getPath (
 		Graph<String, CustomEdge> graph, String source, String target) {
 
 		this.accessCount = 0;
@@ -47,8 +47,10 @@ implements IPathfinder {
 		GraphPathImpl<String, CustomEdge> pathGraph = 
 				new GraphPathImpl<String, CustomEdge> (graph, source, target, edges, 1);
 		
-		System.out.println ("FloydWarshall had " + this.accessCount + " graph access calls.");		
-		return pathGraph;
+		System.out.println ("FloydWarshall had " + this.accessCount + " graph access calls.");
+		
+		// TODO: build path list
+		return null;
 	}
 	
 	private

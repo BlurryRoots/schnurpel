@@ -1,9 +1,10 @@
 package de.hawhamburg.gka.common;
 
+import java.util.List;
+
 import org.jgrapht.Graph;
-import org.jgrapht.GraphPath;
 
 public
 interface IPathfinder {
-	GraphPath<String, CustomEdge> getPath (Graph<String, CustomEdge> graph, String source, String target);
+	List<String> getPath (Graph<String, CustomEdge> graph, String source, String target);
 }
