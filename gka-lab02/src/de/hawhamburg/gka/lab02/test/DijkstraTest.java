@@ -6,8 +6,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.jgrapht.Graph;
-import org.jgrapht.GraphPath;
-import org.jgrapht.graph.GraphPathImpl;
 import org.jgrapht.graph.SimpleGraph;
 import org.junit.After;
 import org.junit.Before;
@@ -21,8 +19,16 @@ public class DijkstraTest {
 	
 	private final
 	String testGraphSource = 
-		"Hanshausen -- Karlstadt (A42) : 42;\n" +
-		"Hanshausen -- Ottofeld (B1337) : 200;";
+		"Ottofeld -- Gotham (A) : 1;\n" +
+		"Ottofeld -- Hanshausen (B) : 3;\n" +
+		"Gotham -- Birdhöhle (C) : 5;\n" +
+		"Gotham -- Frankenthal (D) : 3;\n" +
+		"Gotham -- Hanshausen (E) : 2;\n" +
+		"Hanshausen -- Birdhöhle (F) : 2;\n" +
+		"Hanshausen -- Frankenthal (G) : 1;\n" +
+		"Birdhöhle -- Frankenthal (H) : 2;\n" +
+		"Birdhöhle -- Karlstadt (I) : 1;\n" +
+		"Frankenthal -- Karlstadt (J) : 3;";
 	
 	private final
 	Graph<String, CustomEdge> expectedGraph =
@@ -30,13 +36,24 @@ public class DijkstraTest {
 
 	@Before
 	public void setUp () throws Exception {
-		expectedGraph.addVertex ("Hanshausen");
-		expectedGraph.addVertex ("Karlstadt");
 		expectedGraph.addVertex ("Ottofeld");
-		
-		expectedGraph.addEdge ("Hanshausen", "Karlstadt", new CustomEdge ("A42", 42));
-		expectedGraph.addEdge ("Hanshausen", "Ottofeld", new CustomEdge ("B1337", 200));
-	}
+		expectedGraph.addVertex ("Gotham");
+		expectedGraph.addVertex ("Hanshausen");
+		expectedGraph.addVertex ("Birdhöhle");
+		expectedGraph.addVertex ("Frankenthal");
+		expectedGraph.addVertex ("Karlstadt");
+				
+		expectedGraph.addEdge ("Ottofeld", "Gotham", new CustomEdge ("A", 1));
+		expectedGraph.addEdge ("Ottofeld", "Hanshausen", new CustomEdge ("B", 3));
+		expectedGraph.addEdge ("Gotham", "Birdhöhle", new CustomEdge ("C", 5));
+		expectedGraph.addEdge ("Gotham", "Frankenthal", new CustomEdge ("D", 3));
+		expectedGraph.addEdge ("Gotham", "Hanshausen", new CustomEdge ("E", 2));
+		expectedGraph.addEdge ("Hanshausen", "Birdhöhle", new CustomEdge ("F", 2));
+		expectedGraph.addEdge ("Hanshausen", "Frankenthal", new CustomEdge ("G", 1));
+		expectedGraph.addEdge ("Birdhöhle", "Frankenthal", new CustomEdge ("H", 2));
+		expectedGraph.addEdge ("Birdhöhle", "Karlstadt", new CustomEdge ("I", 1));
+		expectedGraph.addEdge ("Frankenthal", "Karlstadt", new CustomEdge ("J", 3));
+		}
 
 	@After
 	public void tearDown () throws Exception {
@@ -55,10 +72,12 @@ public class DijkstraTest {
 		List<String> expectedPath = new LinkedList<> ();
 		expectedPath.add ("Ottofeld");
 		expectedPath.add ("Hanshausen");
+		expectedPath.add ("Birdhöhle");
 		expectedPath.add ("Karlstadt");
 		
-		List<String> path = dijkstra.getPath (graph, source, target);
 		
+		List<String> path = dijkstra.getPath (graph, source, target);
+		assertNotNull (path);
 		System.out.println (expectedPath.hashCode () + " : " + path.hashCode ());
 		assertEquals (expectedPath, path);
 	}
