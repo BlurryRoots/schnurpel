@@ -22,14 +22,14 @@ public class BigNetTest {
 
 	@Test
 	public void test () {
-		GraphGenerator gen = new GraphGenerator (12345);
+		GraphGenerator gen = new GraphGenerator (123456);
 		Graph<String, CustomEdge> graph = gen.generateNet (4, 4, 1337, 42);
 		
 		System.out.println (graph);
 		
-//		FlowAnalyser a = new EdmondKarpFlowAnalyser (graph);
-//		int flow = a.maxFlow ("q", "s");
-//		System.out.println ("flow is " + flow);
+		FlowAnalyser a = new EdmondKarpFlowAnalyser (graph);
+		int flow = a.maxFlow ("q", "s");
+		System.out.println ("flow is " + flow);
 	}
 
 }
