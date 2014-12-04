@@ -1,6 +1,6 @@
 package de.hawhamburg.gka.lab03.test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import org.jgrapht.Graph;
 import org.jgrapht.graph.SimpleGraph;
@@ -10,10 +10,10 @@ import org.junit.Test;
 
 import de.hawhamburg.gka.common.CustomEdge;
 import de.hawhamburg.gka.common.GraphParser;
-import de.hawhamburg.gka.lab03.EdmondsKarpFlow;
-import de.hawhamburg.gka.lab03.FordFulkerson;
+import de.hawhamburg.gka.lab03.EdmondKarpFlowAnalyser;
+import de.hawhamburg.gka.lab03.FlowAnalyser;
 
-public class FordFulkersonTest {
+public class EdmondsKarpFlowTest {
 
 	private final
 	String testGraphSource = 
@@ -62,7 +62,7 @@ public class FordFulkersonTest {
 		
 		assertEquals (expectedGraph, graph);
 		
-		EdmondsKarpFlow ekf = new EdmondsKarpFlow (graph);
+		FlowAnalyser ekf = new EdmondKarpFlowAnalyser (graph);
 		assertEquals (8, ekf.maxFlow ("q", "s"));
 	}
 

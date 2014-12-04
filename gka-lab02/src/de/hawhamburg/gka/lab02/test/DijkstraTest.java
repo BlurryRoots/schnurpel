@@ -6,8 +6,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.jgrapht.Graph;
-import org.jgrapht.GraphPath;
-import org.jgrapht.graph.GraphPathImpl;
 import org.jgrapht.graph.SimpleGraph;
 import org.junit.After;
 import org.junit.Before;
@@ -23,14 +21,16 @@ public class DijkstraTest {
 	String testGraphSource = 
 		"Ottofeld -- Gotham (A) : 1;\n" +
 		"Ottofeld -- Hanshausen (B) : 3;\n" +
-		"Gotham -- Birdhöhle (C) : 5\n" +
-		"Gotham -- Frankenthal (D) : 3\n" +
-		"Gotham -- Hanshausen (E) : 2\n" +
-		"Hanshausen -- Birdhöhle (F) : 2\n" +
-		"Hanshausen -- Frankenthal (G) : 1\n" +
-		"Birdhöhle -- Frankenthal (H) : 2\n" +
-		"Birdhöhle -- Karlstadt (I) : 1\n" +
-		"Frankenthal -- Karlstadt (J) 3";
+
+		"Gotham -- Birdhöhle (C) : 5;\n" +
+		"Gotham -- Frankenthal (D) : 3;\n" +
+		"Gotham -- Hanshausen (E) : 2;\n" +
+		"Hanshausen -- Birdhöhle (F) : 2;\n" +
+		"Hanshausen -- Frankenthal (G) : 1;\n" +
+		"Birdhöhle -- Frankenthal (H) : 2;\n" +
+		"Birdhöhle -- Karlstadt (I) : 1;\n" +
+		"Frankenthal -- Karlstadt (J) : 3;";
+
 	
 	private final
 	Graph<String, CustomEdge> expectedGraph =
@@ -77,9 +77,8 @@ public class DijkstraTest {
 		expectedPath.add ("Birdhöhle");
 		expectedPath.add ("Karlstadt");
 		
-		
 		List<String> path = dijkstra.getPath (graph, source, target);
-		
+		assertNotNull (path);
 		System.out.println (expectedPath.hashCode () + " : " + path.hashCode ());
 		assertEquals (expectedPath, path);
 	}
