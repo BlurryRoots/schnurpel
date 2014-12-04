@@ -20,26 +20,6 @@ class FlowAnalyser {
 		this.graph = graph;
 	}
 	
-	private
-	Matrix<Integer> initResidualGraph (List<String> vertecies, Set<CustomEdge> edges) {
-	    // Create a residual graph and fill it 0.
-		Matrix<Integer> residualGraph = new Matrix<Integer> (vertecies.size (), 0);
-		// Fill matrix with values from original graph.
-		for (CustomEdge edge : graph.edgeSet ()) {
-			int row = vertecies.indexOf (edge.getSource ());
-			int column = vertecies.indexOf (edge.getTarget ());
-			residualGraph.insert (row, column, edge.getCost ());
-		}
-		
-		return residualGraph;
-	}
-	
-
-	// Returns true if there is a path from source to sink in
-	// residual graph. Also fills parent[] to
-	protected abstract
-	boolean hasPath (String source, String target, Matrix<Integer> residualGraph, List<String> vertecies, int parent[]);
-	
 	// Returns tne maximum flow from s to t in the given graph
 	public
 	int maxFlow (String source, String target) {
@@ -83,4 +63,25 @@ class FlowAnalyser {
 	    // Return the overall flow
 		return maxFlow;
 	}
+
+	// Returns true if there is a path from source to sink in
+	// residual graph. Also fills parent[] to
+	protected abstract
+	boolean hasPath (String source, String target, Matrix<Integer> residualGraph, List<String> vertecies, int parent[]);
+	
+	// Creates a residual graph based on a matrix.
+	private
+	Matrix<Integer> initResidualGraph (List<String> vertecies, Set<CustomEdge> edges) {
+	    // Create a residual graph and fill it 0.
+		Matrix<Integer> residualGraph = new Matrix<Integer> (vertecies.size (), 0);
+		// Fill matrix with values from original graph.
+		for (CustomEdge edge : graph.edgeSet ()) {
+			int row = vertecies.indexOf (edge.getSource ());
+			int column = vertecies.indexOf (edge.getTarget ());
+			residualGraph.insert (row, column, edge.getCost ());
+		}
+		
+		return residualGraph;
+	}
+	
 }

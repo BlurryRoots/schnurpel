@@ -1,6 +1,6 @@
 package de.hawhamburg.gka.lab03.test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import org.jgrapht.Graph;
 import org.jgrapht.graph.SimpleGraph;
@@ -12,7 +12,6 @@ import de.hawhamburg.gka.common.CustomEdge;
 import de.hawhamburg.gka.common.GraphParser;
 import de.hawhamburg.gka.lab03.EdmondKarpFlowAnalyser;
 import de.hawhamburg.gka.lab03.FlowAnalyser;
-import de.hawhamburg.gka.lab03.FordFulkerson;
 
 public class EdmondsKarpFlowTest {
 
