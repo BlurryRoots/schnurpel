@@ -31,6 +31,7 @@ public class DijkstraTest {
 		"Badhöhle -- Frankenthal (H) : 2;\n" +
 		"Badhöhle -- Karlstadt (I) : 1;\n" +
 		"Frankenthal -- Karlstadt (J) : 3;";
+
 	
 	private
 	Graph<String, CustomEdge> expectedGraph;
@@ -78,8 +79,7 @@ public class DijkstraTest {
 		expectedPath.add ("Hanshausen");
 		expectedPath.add ("Badhöhle");
 		expectedPath.add ("Karlstadt");
-		
-		
+
 		List<String> path = finder.getPath (graph, source, target);
 		assertNotNull (path);
 		System.out.println (expectedPath.hashCode () + " : " + path.hashCode ());
