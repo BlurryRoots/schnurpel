@@ -27,9 +27,9 @@ public class BigNetTest {
 		
 		System.out.println (graph);
 		
-		FlowAnalyser a = new EdmondKarpFlowAnalyser (graph);
-		int flow = a.maxFlow ("q", "s");
-		System.out.println ("flow is " + flow);
+//		FlowAnalyser a = new EdmondKarpFlowAnalyser (graph);
+//		int flow = a.maxFlow ("q", "s");
+//		System.out.println ("flow is " + flow);
 	}
 
 }

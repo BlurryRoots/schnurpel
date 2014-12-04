@@ -18,7 +18,7 @@ public class GraphGeneratorTest {
 	GraphGenerator generator;
 	
 	private
-	boolean do800 = true;
+	boolean do800 = false;
 	private
 	boolean do2500 = false;
 	
@@ -34,6 +34,16 @@ public class GraphGeneratorTest {
 	public void tearDown () throws Exception {
 	}
 
+	@Test
+	public void testNet () {
+		final int vc = 3;
+		final int ec = 3;
+		Graph<String, CustomEdge> graph = generator.generateNet (vc, ec, 42, 1);
+		
+		assertEquals (vc + 2, graph.vertexSet ().size ());
+		assertEquals (ec + 2, graph.edgeSet ().size ());
+	}
+	
 	@Test
 	public void test800 () {
 		if (do800) {
