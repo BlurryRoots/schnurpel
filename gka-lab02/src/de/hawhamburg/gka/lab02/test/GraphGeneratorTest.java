@@ -1,6 +1,6 @@
 package de.hawhamburg.gka.lab02.test;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.util.Date;
 
@@ -13,16 +13,23 @@ import de.hawhamburg.gka.common.CustomEdge;
 import de.hawhamburg.gka.lab02.GraphGenerator;
 
 public class GraphGeneratorTest {
+	private static final
+	int SEED = 1337;
+
 	private
-	boolean do800 = false;
+	GraphGenerator generator;
+	
 	private
-	boolean do2500 = false;
+	boolean do800 = true;
+	private
+	boolean do2500 = true;
 	
 	private
 	long t;
 	
 	@Before
 	public void setUp () throws Exception {
+		 generator = new GraphGenerator (SEED);
 	}
 
 	@After
@@ -33,19 +40,24 @@ public class GraphGeneratorTest {
 	public void test800 () {
 		if (do800) {
 			final int vc = 800;
-	//		final int ec = vc * (vc - 1);
 			final int ec = 300000;
-			Graph<String, CustomEdge> graph = GraphGenerator.generateDirected (vc, ec, 42, 1);
+			Graph<String, CustomEdge> graph = generator.generateDirected (vc, ec, 42, 1);
+			
+			assertEquals (vc, graph.vertexSet ().size ());
+			assertEquals (ec, graph.edgeSet ().size ());
 		}
 		
 		assertTrue (true);
 	}
 	
-	@Test
 	public void testKeks () {
+		final int vc = 800;
+		final int ec = vc * (vc -1) / 2;
 		this.startTimer ();
-		GraphGenerator.generateDirected (800, 100000, 42, 1);
+		Graph<String, CustomEdge> graph = generator.generateDirected (vc, ec, 42, 1);
 		System.out.println ("time: " + this.stopTimer ());
+		assertEquals (vc, graph.vertexSet ().size ());
+		assertEquals (ec, graph.edgeSet ().size ());
 	}
 
 	@Test
@@ -53,7 +65,11 @@ public class GraphGeneratorTest {
 		if (do2500) {
 			final int vc = 2500;
 			final int ec = 2000000;
-			Graph<String, CustomEdge> graph = GraphGenerator.generateDirected (vc, ec, 1337, 42);
+			
+			Graph<String, CustomEdge> graph = generator.generateDirected (vc, ec, 1337, 42);
+			
+			assertEquals (vc, graph.vertexSet ().size ());
+			assertEquals (ec, graph.edgeSet ().size ());
 		}
 		
 		assertTrue (true);
