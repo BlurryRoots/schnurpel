@@ -10,7 +10,8 @@ import org.junit.Test;
 
 import de.hawhamburg.gka.common.CustomEdge;
 import de.hawhamburg.gka.common.GraphParser;
-import de.hawhamburg.gka.lab03.EdmondsKarpFlow;
+import de.hawhamburg.gka.lab03.EdmondKarpFlowAnalyser;
+import de.hawhamburg.gka.lab03.FlowAnalyser;
 import de.hawhamburg.gka.lab03.FordFulkerson;
 
 public class EdmondsKarpFlowTest {
@@ -62,7 +63,7 @@ public class EdmondsKarpFlowTest {
 		
 		assertEquals (expectedGraph, graph);
 		
-		EdmondsKarpFlow ekf = new EdmondsKarpFlow (graph);
+		FlowAnalyser ekf = new EdmondKarpFlowAnalyser (graph);
 		assertEquals (8, ekf.maxFlow ("q", "s"));
 	}
 
