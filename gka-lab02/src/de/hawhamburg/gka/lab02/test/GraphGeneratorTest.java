@@ -20,7 +20,7 @@ public class GraphGeneratorTest {
 	GraphGenerator generator;
 	
 	private
-	boolean do800 = true;
+	boolean do800 = false;
 	private
 	boolean do2500 = true;
 	
@@ -48,16 +48,6 @@ public class GraphGeneratorTest {
 		}
 		
 		assertTrue (true);
-	}
-	
-	public void testKeks () {
-		final int vc = 800;
-		final int ec = vc * (vc -1) / 2;
-		this.startTimer ();
-		Graph<String, CustomEdge> graph = generator.generateDirected (vc, ec, 42, 1);
-		System.out.println ("time: " + this.stopTimer ());
-		assertEquals (vc, graph.vertexSet ().size ());
-		assertEquals (ec, graph.edgeSet ().size ());
 	}
 
 	@Test

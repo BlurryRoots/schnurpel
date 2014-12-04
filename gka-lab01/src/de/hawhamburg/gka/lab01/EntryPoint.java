@@ -27,7 +27,7 @@ class EntryPoint {
 	private static
 	void doMagic (String filename) {
 		System.out.println ("---" + filename + "---");
-		GraphParser parser = ParserBuilder.createFromFile (filename);		
+		GraphParser parser = ParserBuilder.createFromResourceFile (filename);		
 		System.out.println (parser.getGraph ().toString ());
 		
 //		FrameGUI w = new FrameGUI (parser.getGraph ());

@@ -7,13 +7,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 
-public class ParserBuilder {
+public class ParserBuilder {	
 	public static
 	GraphParser createFromFile (String filename) {
 		GraphParser parser = null;
 		
-		URL fileUrl = ParserBuilder.class.getResource("/resources/graphs/" + filename);
-		File fileDir = new File (fileUrl.getFile ());
+		File fileDir = new File (filename);
 		
 		try {			 
 			BufferedReader in = new BufferedReader (
@@ -48,5 +47,12 @@ public class ParserBuilder {
 	    }
 		
 		return parser;
+	}
+	
+	public static
+	GraphParser createFromResourceFile (String filename) {		
+		URL fileUrl = ParserBuilder.class.getResource("/resources/graphs/" + filename);
+		
+		return createFromFile (fileUrl.getFile ());
 	}
 }

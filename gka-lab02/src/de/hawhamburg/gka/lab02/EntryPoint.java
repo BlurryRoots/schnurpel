@@ -42,7 +42,7 @@ class EntryPoint {
 		// second argument is a pair of notes to analyze
 		String filename = o.filename;
 		System.out.println ("Analyzing path from " + filename);
-		GraphParser parser = ParserBuilder.createFromFile (filename);
+		GraphParser parser = ParserBuilder.createFromResourceFile (filename);
 		Graph<String, CustomEdge> graph = parser.getGraph (); 
 		System.out.println (graph);
 

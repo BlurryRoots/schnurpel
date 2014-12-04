@@ -1,5 +1,6 @@
 package de.hawhamburg.gka.lab02;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -19,7 +20,11 @@ public class GraphGenerator {
 	}
 	
 	public
-	Graph<String, CustomEdge> generateDirected (int verticesCount, int edgeCount, int maxWeight, int minWeight) {		
+	Graph<String, CustomEdge> generateDirected (int verticesCount, int edgeCount, int maxWeight, int minWeight) {
+		if (edgeCount > (verticesCount * (verticesCount - 1) / 2)) {
+			throw new RuntimeException ("To many edges!");
+		}
+		
 		Graph<String, CustomEdge> graph = 
 			new DefaultDirectedGraph<String, CustomEdge> (CustomEdge.class);
 		
@@ -41,12 +46,34 @@ public class GraphGenerator {
 			String v2 = vertices.get (r.nextInt (verticesCount));
 
 			// zweiten knoten im falle von kollision aufsteigen ermitteln	
-			while (v1.equals (v2) || graph.containsEdge (v1, v2)) {
+			while (v1.equals (v2) ||
+				   graph.containsEdge (v1, v2) ||
+				   graph.containsEdge (v2, v1)) {
 				v2 = vertices.get (r.nextInt (verticesCount));
 			} 
 			
 			graph.addEdge (v1, v2, edges.remove (0));
 		}
+		
+		return graph;
+	}
+	
+	public
+	Graph<String, CustomEdge> generateNet (int verticesCount, int edgeCount, int maxWeight, int minWeight) {
+		Graph<String, CustomEdge> graph = generateDirected (verticesCount, edgeCount, maxWeight, minWeight);
+		
+		List<String> vertecies = new ArrayList<> (graph.vertexSet ());
+		List<CustomEdge> edges = new ArrayList<> (graph.edgeSet ());
+		
+		String entry = vertecies.get (r.nextInt (verticesCount));
+		
+		graph.addVertex ("q");
+		graph.addVertex ("s");
+		
+		graph.addEdge ("q", entry, new CustomEdge ("entry", maxWeight));
+		
+		CustomEdge exitEdge = edges.get (r.nextInt (edgeCount));
+		graph.addEdge (exitEdge.getTarget (), "s", new CustomEdge ("exit", maxWeight));
 		
 		return graph;
 	}
