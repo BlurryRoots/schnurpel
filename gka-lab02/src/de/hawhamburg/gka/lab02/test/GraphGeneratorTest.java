@@ -2,8 +2,6 @@ package de.hawhamburg.gka.lab02.test;
 
 import static org.junit.Assert.*;
 
-import java.util.Date;
-
 import org.jgrapht.Graph;
 import org.junit.After;
 import org.junit.Before;
@@ -20,9 +18,9 @@ public class GraphGeneratorTest {
 	GraphGenerator generator;
 	
 	private
-	boolean do800 = false;
+	boolean do800 = true;
 	private
-	boolean do2500 = true;
+	boolean do2500 = false;
 	
 	private
 	long t;

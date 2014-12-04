@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.jgrapht.Graph;
+
 import org.jgrapht.graph.SimpleGraph;
 import org.junit.After;
 import org.junit.Before;
@@ -15,6 +16,7 @@ import org.junit.Test;
 import de.hawhamburg.gka.common.CustomEdge;
 import de.hawhamburg.gka.common.GraphParser;
 import de.hawhamburg.gka.common.IPathfinder;
+
 import de.hawhamburg.gka.lab02.FloydWarshall;
 
 public class FloydWarshallAlgorithmStrategyTest {
@@ -67,7 +69,7 @@ public class FloydWarshallAlgorithmStrategyTest {
 	public void testGetPath () {
 		final String source = "Ottofeld";
 		final String target = "Karlstadt";
-		IPathfinder finder = new FloydWarshall ();		
+		IPathfinder finder = new FloydWarshall ();
 		GraphParser parser = new GraphParser (testGraphSource);
 		Graph<String, CustomEdge> graph = parser.getGraph ();
 		

@@ -10,6 +10,7 @@ import org.jgrapht.graph.DefaultDirectedGraph;
 
 import de.hawhamburg.gka.common.CustomEdge;
 
+
 public class GraphGenerator {
 	private
 	Random r;
@@ -24,7 +25,7 @@ public class GraphGenerator {
 		if (edgeCount > (verticesCount * (verticesCount - 1) / 2)) {
 			throw new RuntimeException ("To many edges!");
 		}
-		
+
 		Graph<String, CustomEdge> graph = 
 			new DefaultDirectedGraph<String, CustomEdge> (CustomEdge.class);
 		
@@ -45,7 +46,7 @@ public class GraphGenerator {
 			String v1 = vertices.get (r.nextInt (verticesCount));
 			String v2 = vertices.get (r.nextInt (verticesCount));
 
-			// zweiten knoten im falle von kollision aufsteigen ermitteln	
+			// zweiten knoten im falle von kollision aufsteigen ermitteln
 			while (v1.equals (v2) ||
 				   graph.containsEdge (v1, v2) ||
 				   graph.containsEdge (v2, v1)) {
