@@ -11,7 +11,9 @@ import de.hawhamburg.gka.lab03.EdmondKarpFlowAnalyser;
 import de.hawhamburg.gka.lab03.FlowAnalyser;
 
 public class BigNetTest {
-
+	private static final
+	int INTERESTING_SEED = 143;
+	
 	@Before
 	public void setUp () throws Exception {
 	}
@@ -22,8 +24,10 @@ public class BigNetTest {
 
 	@Test
 	public void test () {
-		GraphGenerator gen = new GraphGenerator (123456);
-		Graph<String, CustomEdge> graph = gen.generateNet (4, 4, 1337, 42);
+		int seed = INTERESTING_SEED;
+		System.out.println ("with seed " + seed);
+		GraphGenerator gen = new GraphGenerator (seed);
+		Graph<String, CustomEdge> graph = gen.generateNet (10, 6, 1337, 42);
 		
 		System.out.println (graph);
 		
