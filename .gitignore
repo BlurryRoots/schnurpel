@@ -1,8 +1,18 @@
 .metadata
 .recommenders
 gka-common/.gitignore
+gka-common/.classpath
+gka-common/.settings
+gka-common/bin
 gka-lab01/.gitignore
+gka-lab01/bin
 gka-lab02/.gitignore
+gka-lab02/.classpath
+gka-lab02/.settings
+gka-lab02/bin
+gka-lab03/.settings
+gka-lab03/.classpath
+gka-lab03/bin
 jgraphx
 vsp03
 
