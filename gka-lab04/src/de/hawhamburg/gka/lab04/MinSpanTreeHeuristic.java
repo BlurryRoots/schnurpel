@@ -8,6 +8,7 @@ import java.util.Set;
 
 import org.jgrapht.*;
 import org.jgrapht.alg.ConnectivityInspector;
+import org.jgrapht.graph.SimpleGraph;
 
 import de.hawhamburg.gka.common.CustomEdge;
 
@@ -19,15 +20,15 @@ public class MinSpanTreeHeuristic {
 	
 	public UndirectedGraph<String, CustomEdge> minSpanTreeHeuristic(UndirectedGraph<String, CustomEdge> graph, String startingpoint){
 		
-		UndirectedGraph copyGraph = graph;
+		UndirectedGraph<String, CustomEdge> copyGraph = graph;
 		
 		UndirectedGraph<String, CustomEdge> minSpanTree = mst.minSpanTree(copyGraph);
 		
 		UndirectedGraph<String, CustomEdge> eulerscherGraph = eulerscherGraph(minSpanTree);
 		
-		List<String> eulerCircuit =	new ArrayList<String>(fleurys.fleurysAlgorithm(eulerscherGraph, startingpoint));
+		List<String> eulerCircuit = new ArrayList<String>(fleurys.fleurysAlgorithm(eulerscherGraph, startingpoint));
 				
-		UndirectedGraph resultGraph = null;
+		UndirectedGraph resultGraph = new SimpleGraph<String, CustomEdge>(CustomEdge.class);
 		
 		//add all Vertexes to resultgraph
 		Set vertexSet = graph.vertexSet();
@@ -39,17 +40,26 @@ public class MinSpanTreeHeuristic {
 
 		Iterator it = eulerCircuit.iterator();
 		
+		String currentVertex = it.next().toString();
+		String nextVertex = null;
+		
+		
 		while(it.hasNext()){
 			
-			String currentVertex = it.next().toString();
+			nextVertex = it.next().toString();
 			
-//			resultGraph.addEdge(graph.getEdgeSource(currentEdge), graph.getEdgeTarget(currentEdge), currentEdge);
+			while(resultGraph.edgesOf(nextVertex).size() == 2)
+				nextVertex = it.next().toString();
+						
+			CustomEdge edge = graph.getEdge(currentVertex, nextVertex);
+			
+			resultGraph.addEdge(currentVertex, nextVertex, edge);
+			
+			currentVertex = nextVertex;
 			
 		}
 		
-		
-		
-		return null;
+		return resultGraph;
 	
 	}
 	
@@ -57,16 +67,16 @@ public class MinSpanTreeHeuristic {
 	//create eulscher graph
 	public UndirectedGraph<String, CustomEdge> eulerscherGraph(UndirectedGraph<String, CustomEdge> graph){
 		
-		Set edges = new HashSet(); 
-		edges.add(graph.edgeSet());
+		Set edgesSet = new HashSet(); 
+		edgesSet.add(graph.edgeSet());
 		
 		CustomEdge edge;
 		
-		Iterator it = edges.iterator();
+		Iterator<CustomEdge> it = edgesSet.iterator();
 		
 		while(it.hasNext()){
 		
-			edge = (CustomEdge) it.next();
+			edge = it.next();
 			graph.addEdge(graph.getEdgeSource(edge), graph.getEdgeTarget(edge), edge);
 		}
 		

@@ -47,7 +47,7 @@ public class MinSpanTreeTest {
 		expectedGraph.addVertex ("v5");
 		expectedGraph.addVertex ("v6");
 
-		expectedGraph.addEdge("v0", "v2", new CustomEdge ("B", 14));
+		expectedGraph.addEdge("v0", "v2", new CustomEdge ("B", 14));	
 		expectedGraph.addEdge("v1", "v4", new CustomEdge ("E", 10));
 		expectedGraph.addEdge("v1", "v6", new CustomEdge ("F", 4));
 		expectedGraph.addEdge("v2", "v3", new CustomEdge ("G", 20));

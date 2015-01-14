@@ -15,12 +15,13 @@ import de.hawhamburg.gka.common.CustomEdge;
 
 public class FleurysAlgorithm {
 	
-	public List<String> fleurysAlgorithm(UndirectedGraph<String, CustomEdge> graph, String startingpoint){
+	public List fleurysAlgorithm(UndirectedGraph<String, CustomEdge> graph, String startingpoint){
 		
 		List<String> verticiesRoute = new ArrayList<String>();
 		String nextVertex = startingpoint;
 		boolean checkForBridges = true;
-		CustomEdge edge = null;
+		boolean graphAllreadyVisited = true;
+		CustomEdge edge = new CustomEdge();
 		  
 		while(graph.vertexSet().size() > 1){	
 			
@@ -33,9 +34,8 @@ public class FleurysAlgorithm {
 				
 				if(checkForBridges = edgeIsBridgeEdge(graph, edge))
 					edgesList.removeFirst();
-				
-			}
 
+			}
 			
 			verticiesRoute.add(graph.getEdgeSource(edge).toString());
 	
