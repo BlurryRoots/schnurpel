@@ -13,11 +13,10 @@ public class MinSpanTree {
 
 	//create the minimum spanning tree
 	public 
-	Set minspantree(UndirectedGraph<String, CustomEdge> graph){
+	UndirectedGraph<String, CustomEdge> minSpanTree(UndirectedGraph<String, CustomEdge> graph){
 		
 		UndirectedGraph<String, CustomEdge> minSpanTreeGraph = null;
 		
-
 		ConnectivityInspector<String,CustomEdge> newGraph = new ConnectivityInspector<String, CustomEdge>(minSpanTreeGraph);
 				
 		while(!(newGraph.isGraphConnected())){
@@ -27,17 +26,14 @@ public class MinSpanTree {
 		CustomEdge edge = getEdgeWithMinimumCost(graph, edges);
 		
 		edges.remove(edge);
-		
+				
 		if((!addingEdgeToGraphCreatesCycle(graph, minSpanTreeGraph, edge)))
 			minSpanTreeGraph.addVertex(graph.getEdgeSource(edge));
 			minSpanTreeGraph.addVertex(graph.getEdgeTarget(edge));
 			minSpanTreeGraph.addEdge(graph.getEdgeSource(edge), graph.getEdgeTarget(edge), edge);
 	}
-		
-		Set treeEdges = new HashSet(); 
-		treeEdges.add(minSpanTreeGraph.edgeSet());	
-		
-		return treeEdges;
+	
+		return minSpanTreeGraph;
 }	
 	
 	private 
@@ -68,7 +64,7 @@ public class MinSpanTree {
 		
 		while(it.hasNext()){
 			
-			edge = (CustomEdge) it.next();
+			edge =  (CustomEdge) it.next();
 			weight = graph.getEdgeWeight(edge);
 			
 			if(weight < minWeight){
