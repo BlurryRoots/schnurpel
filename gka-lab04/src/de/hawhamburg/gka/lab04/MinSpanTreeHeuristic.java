@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.jgrapht.*;
+import org.jgrapht.alg.ConnectivityInspector;
 
 import de.hawhamburg.gka.common.CustomEdge;
 
@@ -18,19 +19,35 @@ public class MinSpanTreeHeuristic {
 	
 	public UndirectedGraph<String, CustomEdge> minSpanTreeHeuristic(UndirectedGraph<String, CustomEdge> graph, String startingpoint){
 		
-		UndirectedGraph<String, CustomEdge> minSpanTree = mst.minSpanTree(graph);
+		UndirectedGraph copyGraph = graph;
+		
+		UndirectedGraph<String, CustomEdge> minSpanTree = mst.minSpanTree(copyGraph);
 		
 		UndirectedGraph<String, CustomEdge> eulerscherGraph = eulerscherGraph(minSpanTree);
 		
 		List<String> eulerCircuit =	new ArrayList<String>(fleurys.fleurysAlgorithm(eulerscherGraph, startingpoint));
+				
+		UndirectedGraph resultGraph = null;
 		
-		/*
-		eulerCircuit durchgehen, bis ein Vertex erreicht ist, der bereits aufgetaucht ist. 
-		Dann vom Vertex davor und den Nachfolgenden, von der Dopplung ausgehend, eine direkte Kante einfügen.
+		//add all Vertexes to resultgraph
+		Set vertexSet = graph.vertexSet();
+		Iterator vertIt = vertexSet.iterator();
+		while(vertIt.hasNext()){
+			
+			resultGraph.addVertex(vertIt.next());
+		}
+
+		Iterator it = eulerCircuit.iterator();
 		
-		Mit welcher gewichtung? braucht man doch den ganzen graphen und nicht nur den minimum spanning tree?
+		while(it.hasNext()){
+			
+			String currentVertex = it.next().toString();
+			
+//			resultGraph.addEdge(graph.getEdgeSource(currentEdge), graph.getEdgeTarget(currentEdge), currentEdge);
+			
+		}
 		
-		*/
+		
 		
 		return null;
 	
@@ -54,6 +71,16 @@ public class MinSpanTreeHeuristic {
 		}
 		
 		return graph;
+		
+	}
+	
+	
+	//testing
+	public boolean testInspector(UndirectedGraph<String, CustomEdge> graph){
+		
+		ConnectivityInspector<String,CustomEdge> newGraph = new ConnectivityInspector<String, CustomEdge>(graph);
+		
+		return newGraph.isGraphConnected();
 		
 	}
 
