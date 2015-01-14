@@ -37,6 +37,10 @@ public class MinSpanTreeHeuristicTest {
 
 		assertEquals(true, msth.testInspector(cGraph));		
 
+		UndirectedGraph<String, CustomEdge> empty = new SimpleGraph<String, CustomEdge>(CustomEdge.class);
+		
+		assertEquals(false, msth.testInspector(empty));
+		
 	}
 
 }
