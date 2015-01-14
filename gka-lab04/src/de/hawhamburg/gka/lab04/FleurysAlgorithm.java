@@ -3,6 +3,7 @@ package de.hawhamburg.gka.lab04;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -17,35 +18,44 @@ public class FleurysAlgorithm {
 	public List<String> fleurysAlgorithm(UndirectedGraph<String, CustomEdge> graph, String startingpoint){
 		
 		List<String> verticiesRoute = new ArrayList<String>();
-		
-		Set edges = new HashSet(graph.edgesOf(startingpoint));
-		
-		CustomEdge edge = choseNextEdge(edges);
-		String nextVertex;
-		
-		while(graph.vertexSet().size() != 1){
-		
-		while(edgeIsNoBridgeEdge(graph, edge)){
+		String nextVertex = startingpoint;
+		boolean checkForBridges = true;
+		CustomEdge edge = null;
+		  
+		while(graph.vertexSet().size() > 1){	
 			
-			edges.remove(edge);
-			edge = choseNextEdge(edges);			
-		}
+			LinkedList edgesList = new LinkedList<CustomEdge>(graph.edgesOf(nextVertex));
 			
-		verticiesRoute.add(graph.getEdgeSource(edge).toString());
+			//Choose an edge which does not disconnect the graph after removed
+			while(checkForBridges){
+				
+				edge = (CustomEdge) edgesList.getFirst();				
+				
+				if(checkForBridges = edgeIsBridgeEdge(graph, edge))
+					edgesList.removeFirst();
+				
+			}
 
-		nextVertex = graph.getEdgeTarget(edge).toString();
+			
+			verticiesRoute.add(graph.getEdgeSource(edge).toString());
+	
+			nextVertex = graph.getEdgeTarget(edge).toString();
+			
+			graph.removeEdge(edge);
 		
-		graph.removeEdge(edge);
-		
-		if((graph.edgesOf(graph.getEdgeSource(edge))).size() == 0)
-			graph.removeVertex(graph.getEdgeSource(edge));
+			//has source vertex still edges, if not remove it
+			if((graph.edgesOf(graph.getEdgeSource(edge))).size() == 0)
+				graph.removeVertex(graph.getEdgeSource(edge));
 		
 		}
+		
+		verticiesRoute.add(nextVertex);
 		
 		return verticiesRoute;
 	}
-		
-	private CustomEdge choseNextEdge(Set edges) {
+	
+/*		
+	private CustomEdge choseNextEdge(LinkedList<CustomEdge> edges) {
 	
 		CustomEdge edge;
 		
@@ -59,16 +69,19 @@ public class FleurysAlgorithm {
 		
 		return null;
 	}
-
-	private boolean edgeIsNoBridgeEdge(UndirectedGraph graph, CustomEdge edge) {
+*/
+	
+	private boolean edgeIsBridgeEdge(UndirectedGraph graph, CustomEdge edge) {
 		
-		graph.removeEdge(edge);
+		Graph graphCopy = graph;
+		
+		graphCopy.removeEdge(edge);
 		
 		ConnectivityInspector<String,CustomEdge> newGraph = new ConnectivityInspector<String, CustomEdge>((UndirectedGraph<String, CustomEdge>) graph);
 		
 		if(newGraph.isGraphConnected())
-			return true;
+			return false;
 		
-		return false;
+		return true;
 	}
 }
