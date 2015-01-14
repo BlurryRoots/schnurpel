@@ -3,6 +3,7 @@ package de.hawhamburg.gka.common.test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.sql.Time;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -31,9 +32,9 @@ public class GeneratorTest {
 
 	@Test
 	public void testGenerateComplete () {
-		final int NUM_VERTICES = 4;
+		final int NUM_VERTICES = 5;
 		final int WEIGHT = 42;
-		final int SEED = 98723487;
+		final long SEED = System.currentTimeMillis ();
 		
 		Generator g = new Generator ();
 		g.setSeed (SEED);
