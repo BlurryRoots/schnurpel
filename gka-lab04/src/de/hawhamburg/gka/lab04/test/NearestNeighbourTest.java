@@ -2,9 +2,6 @@ package de.hawhamburg.gka.lab04.test;
 
 import static org.junit.Assert.*;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import org.jgrapht.Graph;
 import org.jgrapht.graph.SimpleGraph;
 import org.junit.After;
