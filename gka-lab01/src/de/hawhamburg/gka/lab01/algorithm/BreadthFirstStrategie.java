@@ -20,32 +20,29 @@ class BreadthFirstStrategie
 						  CustomEdge> graph,
 						  String source,
 						  String target) {
-
+//		 procedure BFS(G,v) is
+//	      create a queue Q
+//	      create a set V
+//	      add v to V
+//	      enqueue v onto Q
+//	      while Q is not empty loop
+//	         t ← Q.dequeue()
+//	         
+//	         if t is what we are looking for then
+//	            return t
+//	        end if
+//	        
+//	        for all edges e in G.adjacentEdges(t) loop
+//	           u ← G.adjacentVertex(t,e)
+//	           if u is not in V then
+//	               add u to V
+//	               enqueue u onto Q
+//	           end if
+//	        end loop
+//	     end loop
+//	     return none
+//	 	end BFS
 		
-		/*
-		 procedure BFS(G,v) is
-	      create a queue Q
-	      create a set V
-	      add v to V
-	      enqueue v onto Q
-	      while Q is not empty loop
-	         t ← Q.dequeue()
-	         
-	         if t is what we are looking for then
-	            return t
-	        end if
-	        
-	        for all edges e in G.adjacentEdges(t) loop
-	           u ← G.adjacentVertex(t,e)
-	           if u is not in V then
-	               add u to V
-	               enqueue u onto Q
-	           end if
-	        end loop
-	     end loop
-	     return none
-	 	end BFS
-		 */
 		
 		// path to be found
 		List<String> path = new LinkedList<String> ();
@@ -78,7 +75,9 @@ class BreadthFirstStrategie
 			else {
 				for (CustomEdge edge : graph.edgesOf (current.name)) {
 					WeightedVertex end = new WeightedVertex (
-						edge.getTarget (),
+						(current.name.equals (edge.getTarget ()))
+							? edge.getSource ()
+							: edge.getTarget (),
 						current,
 						0
 					);
