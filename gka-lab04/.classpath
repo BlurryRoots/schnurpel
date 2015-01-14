@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="lib" path="/gka-common/lib/jcommander/jcommander-1.46.jar"/>
+	<classpathentry kind="lib" path="/gka-common/lib/jgrapht-0.9.0/lib/jgraph-5.13.0.0.jar" sourcepath="/gka-common/lib/jgrapht-0.9.0/source">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/home/hal/Workspace/Eclipse/gka-common/lib/jgrapht-0.9.0/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/gka-common/lib/jgrapht-0.9.0/lib/jgrapht-core-0.9.0.jar" sourcepath="/gka-common/lib/jgrapht-0.9.0/source/jgrapht-core">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/home/hal/Workspace/Eclipse/gka-common/lib/jgrapht-0.9.0/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/gka-common/lib/jgrapht-0.9.0/lib/jgrapht-demo-0.9.0.jar" sourcepath="/gka-common/lib/jgrapht-0.9.0/source/jgrapht-demo"/>
+	<classpathentry kind="lib" path="/gka-common/lib/jgrapht-0.9.0/lib/jgrapht-ext-0.9.0-uber.jar"/>
+	<classpathentry kind="lib" path="/gka-common/lib/jgrapht-0.9.0/lib/jgrapht-ext-0.9.0.jar" sourcepath="/gka-common/lib/jgrapht-0.9.0/source/jgrapht-ext"/>
+	<classpathentry kind="lib" path="/gka-common/lib/jgrapht-0.9.0/lib/jgraphx-2.0.0.1.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/gka-common"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/gka-lab01"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/gka-lab02"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/gka-lab03"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

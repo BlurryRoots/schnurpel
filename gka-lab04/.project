@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>gka-lab02</name>
+	<name>gka-lab04</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -14,11 +14,4 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>jcommander-src</name>
-			<type>2</type>
-			<location>C:/home/hal/Workspace/Eclipse/gka-common/lib/jcommander/src</location>
-		</link>
-	</linkedResources>
 </projectDescription>
