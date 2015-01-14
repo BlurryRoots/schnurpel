@@ -16,72 +16,63 @@ import de.hawhamburg.gka.common.ISearchStrategy;
 import de.hawhamburg.gka.common.Pathfinder;
 import de.hawhamburg.gka.lab01.algorithm.BreadthFirstStrategie;
 
-public class MinSpanTree {
-	
-	private BreadthFirstStrategie bfs;
+public
+class MinSpanTree {
+	private
+	Graph<String, CustomEdge> graph;
+
+	public
+	MinSpanTree (UndirectedGraph<String, CustomEdge> graph_) {
+		this.graph = graph_;
+	}
 	
 	//create the minimum spanning tree
 	public 
-	UndirectedGraph<String, CustomEdge> minSpanTree(UndirectedGraph<String, CustomEdge> graph){
-	
-		UndirectedGraph<String, CustomEdge> minSpanTree = new SimpleGraph<String, CustomEdge>(CustomEdge.class);
+	UndirectedGraph<String, CustomEdge> getMinimumSpanTree () {
+		UndirectedGraph<String, CustomEdge> minSpanTree =
+			new SimpleGraph<String, CustomEdge>(CustomEdge.class);
 		
-		Set<String> vertecies = graph.vertexSet();
-		Iterator<String> it = vertecies.iterator();
-		
-		while(it.hasNext()){
-			
-			minSpanTree.addVertex(it.next());
+		Set<String> vertecies = graph.vertexSet();		
+		for (String v : this.graph.vertexSet ()) {
+			minSpanTree.addVertex (v);
 		}
 		
-		ConnectivityInspector<String,CustomEdge> newGraph = new ConnectivityInspector<String, CustomEdge>(minSpanTree);
+		ConnectivityInspector<String, CustomEdge> inspector =
+			new ConnectivityInspector<String, CustomEdge> (minSpanTree);
 
-		Set<CustomEdge> edgesSet = new HashSet<CustomEdge>(graph.edgeSet()); 
+		Set<CustomEdge> edgesSet = new HashSet<CustomEdge> (this.graph.edgeSet()); 
 		
-		while(!(newGraph.isGraphConnected())){
-
-
-			CustomEdge minEdge = getEdgeWithMinimumCost(graph, edgesSet);
+		while (! inspector.isGraphConnected() && ! edgesSet.isEmpty ()) {
+			CustomEdge minEdge = getEdgeWithMinimumCost (graph, edgesSet);
+			Pathfinder finder = new Pathfinder (minSpanTree, new BreadthFirstStrategie ());
 			
-			System.out.println(minSpanTree);
-			
-			if((!addingEdgeToGraphCreatesCycle(minSpanTree, minEdge))){
-				minSpanTree.addEdge(graph.getEdgeSource(minEdge), graph.getEdgeTarget(minEdge), minEdge);
+			if (null == minEdge) {
+				throw new RuntimeException ("NO NO NO!");
 			}
 			
-			edgesSet.remove(minEdge);
-
+			//if((!addingEdgeToGraphCreatesCycle(minSpanTree, minEdge))){
+			String s = minEdge.getSource ();
+			String t = minEdge.getTarget ();
+			List<String> path = finder.find (s, t);
+			if (path.isEmpty ()) {
+				// means there is no cycle yet
+				minSpanTree.addEdge(s, t, minEdge);
+			}
+			
+			edgesSet.remove (minEdge);
 		}
 		
 		return minSpanTree;
-}	
-	
-	private 
-	boolean addingEdgeToGraphCreatesCycle(
-			UndirectedGraph<String, CustomEdge> graph,
-			CustomEdge edge) {
-
-		String source = graph.getEdgeSource(edge);
-		String target = graph.getEdgeTarget(edge);
-		
-		List<String> emptyList = new ArrayList();
-		
-		//there is allready a path from edge source to edge target
-		if((bfs.getPath(graph, source, target) != emptyList))
-			return true;
-				
-		return false;
-
-	}
+}
 
 	//return the edge with the lowest value out of a set of edges
 	private 
-	CustomEdge getEdgeWithMinimumCost(UndirectedGraph<String, CustomEdge> graph, Set<CustomEdge> edgesSet){
+	CustomEdge getEdgeWithMinimumCost(Graph<String, CustomEdge> graph, Set<CustomEdge> edgesSet){
 	
 		int weight;
 		int minWeight = Integer.MAX_VALUE;
 		CustomEdge edge;
-		CustomEdge minEdge = new CustomEdge();
+		CustomEdge minEdge = null;
 		
 		Iterator<CustomEdge> it = edgesSet.iterator();
 		

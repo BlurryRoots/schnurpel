@@ -22,7 +22,7 @@ public class MinSpanTreeHeuristic {
 		
 		UndirectedGraph<String, CustomEdge> copyGraph = graph;
 		
-		UndirectedGraph<String, CustomEdge> minSpanTree = mst.minSpanTree(copyGraph);
+		UndirectedGraph<String, CustomEdge> minSpanTree = mst.getMinimumSpanTree ();
 		
 		UndirectedGraph<String, CustomEdge> eulerscherGraph = eulerscherGraph(minSpanTree);
 		

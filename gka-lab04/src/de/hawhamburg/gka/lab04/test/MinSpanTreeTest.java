@@ -31,13 +31,15 @@ public class MinSpanTreeTest {
 			"v3 -- v6 (L) : 30;\n" +
 			"v4 -- v6 (M) : 13;\n";
 	
-	private
-	Graph<String, CustomEdge> expectedGraph;
-	
 	@Before
 	public void setUp () throws Exception {
-		expectedGraph =
-				new SimpleGraph<String, CustomEdge> (CustomEdge.class);
+
+	}
+		
+	@Test
+	public void testMinSpanTree() {
+		Graph<String, CustomEdge> expectedGraph =
+			new SimpleGraph<String, CustomEdge> (CustomEdge.class);
 
 		expectedGraph.addVertex ("v0");
 		expectedGraph.addVertex ("v1");
@@ -53,18 +55,46 @@ public class MinSpanTreeTest {
 		expectedGraph.addEdge("v2", "v3", new CustomEdge ("G", 20));
 		expectedGraph.addEdge("v2", "v5", new CustomEdge ("H", 6));
 		expectedGraph.addEdge("v2", "v6", new CustomEdge ("I", 22));
-	}
-		
-	@Test
-	public void testMinSpanTree() {
-		MinSpanTree mst = new MinSpanTree();
 		
 		GraphParser parser = new GraphParser (testGraphSource);
 		UndirectedGraph<String, CustomEdge> graph = (UndirectedGraph<String, CustomEdge>) parser.getGraph();
 		
-		
-		assertEquals(expectedGraph, mst.minSpanTree(graph));
+		MinSpanTree mst = new MinSpanTree (graph);		
+		assertEquals(expectedGraph, mst.getMinimumSpanTree ());
 		
 	}
 
+	@Test public
+	void testSpanTree () {
+		UndirectedGraph<String, CustomEdge> expectedGraph =
+			new SimpleGraph<String, CustomEdge> (CustomEdge.class);
+		expectedGraph.addVertex ("A");
+		expectedGraph.addVertex ("B");
+		expectedGraph.addVertex ("C");
+		expectedGraph.addVertex ("D");
+		expectedGraph.addVertex ("E");
+		
+		expectedGraph.addEdge ("A", "B", new CustomEdge (7));
+		expectedGraph.addEdge ("A", "C", new CustomEdge (4));
+		expectedGraph.addEdge ("C", "D", new CustomEdge (3));
+		expectedGraph.addEdge ("D", "E", new CustomEdge (2));
+		
+		UndirectedGraph<String, CustomEdge> graph =
+			new SimpleGraph<String, CustomEdge> (CustomEdge.class);
+		graph.addVertex ("A");
+		graph.addVertex ("B");
+		graph.addVertex ("C");
+		graph.addVertex ("D");
+		graph.addVertex ("E");
+		
+		graph.addEdge ("A", "B", new CustomEdge (7));
+		graph.addEdge ("A", "C", new CustomEdge (4));
+		graph.addEdge ("A", "D", new CustomEdge (6));
+		graph.addEdge ("A", "E", new CustomEdge (5));
+		graph.addEdge ("C", "D", new CustomEdge (3));
+		graph.addEdge ("D", "E", new CustomEdge (2));
+		
+		MinSpanTree mst = new MinSpanTree (graph);
+		assertEquals(expectedGraph, mst.getMinimumSpanTree ());
+	}
 }
