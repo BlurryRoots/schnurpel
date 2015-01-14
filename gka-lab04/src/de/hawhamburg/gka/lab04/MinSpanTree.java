@@ -50,7 +50,6 @@ class MinSpanTree {
 				throw new RuntimeException ("NO NO NO!");
 			}
 			
-			//if((!addingEdgeToGraphCreatesCycle(minSpanTree, minEdge))){
 			String s = minEdge.getSource ();
 			String t = minEdge.getTarget ();
 			List<String> path = finder.find (s, t);

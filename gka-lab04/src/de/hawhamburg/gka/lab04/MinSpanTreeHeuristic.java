@@ -24,7 +24,7 @@ public class MinSpanTreeHeuristic {
 		
 		UndirectedGraph<String, CustomEdge> minSpanTree = mst.getMinimumSpanTree ();
 		
-		UndirectedGraph<String, CustomEdge> eulerscherGraph = eulerscherGraph(minSpanTree);
+		UndirectedGraph<String, CustomEdge> eulerscherGraph = createEulerGraph(minSpanTree);
 		
 		List<String> eulerCircuit = new ArrayList<String>(fleurys.fleurysAlgorithm(eulerscherGraph, startingpoint));
 				
@@ -65,23 +65,20 @@ public class MinSpanTreeHeuristic {
 	
 	
 	//create eulscher graph
-	public UndirectedGraph<String, CustomEdge> eulerscherGraph(UndirectedGraph<String, CustomEdge> graph){
-		
-		Set edgesSet = new HashSet(); 
-		edgesSet.add(graph.edgeSet());
-		
-		CustomEdge edge;
-		
-		Iterator<CustomEdge> it = edgesSet.iterator();
-		
-		while(it.hasNext()){
-		
-			edge = it.next();
-			graph.addEdge(graph.getEdgeSource(edge), graph.getEdgeTarget(edge), edge);
+	public static
+	UndirectedGraph<String, CustomEdge> createEulerGraph (UndirectedGraph<String, CustomEdge> graph){
+		UndirectedGraph<String, CustomEdge> eulerGraph =
+			new SimpleGraph<String, CustomEdge> (CustomEdge.class);
+		for (String v : graph.vertexSet ()) {
+			eulerGraph.addVertex (v);
 		}
 		
-		return graph;
+		for (CustomEdge edge : graph.edgeSet ()) {
+			eulerGraph.addEdge(edge.getSource (), edge.getTarget (), edge);
+			eulerGraph.addEdge(edge.getSource (), edge.getTarget (), edge);
+		}
 		
+		return eulerGraph;
 	}
 	
 	

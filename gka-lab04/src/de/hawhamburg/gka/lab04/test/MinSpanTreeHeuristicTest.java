@@ -63,7 +63,7 @@ public class MinSpanTreeHeuristicTest {
 		GraphParser parser = new GraphParser (testMinSpanTree);
 		UndirectedGraph<String, CustomEdge> graph = (UndirectedGraph<String, CustomEdge>) parser.getGraph();
 		
-		assertEquals(expectedGraph, msth.eulerscherGraph(graph));
+		assertEquals(expectedGraph, MinSpanTreeHeuristic.createEulerGraph(graph));
 
 	}
 	
