@@ -1,6 +1,10 @@
 package de.hawhamburg.gka.common.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import java.util.LinkedList;
+import java.util.List;
 
 import org.jgrapht.Graph;
 import org.junit.After;
@@ -27,12 +31,19 @@ public class GeneratorTest {
 
 	@Test
 	public void testGenerateComplete () {
-		Generator g = new Generator (1337);
-		final int NV = 2400;
+		final int NUM_VERTICES = 4;
+		final int WEIGHT = 42;
+		final int SEED = 98723487;
 		
-		Graph<String, CustomEdge> graph = g.generateComplete (NV, 12, 42);
+		Generator g = new Generator ();
+		g.setSeed (SEED);
+		g.setMaximumWeight (WEIGHT);
+		g.setVerticesCount (NUM_VERTICES);
+		
+		Graph<String, CustomEdge> graph = g.build ();
 		assertNotNull (graph);
-		assertEquals (this.calculateEdgeCount (NV), graph.edgeSet ().size ());
+		assertEquals (this.calculateEdgeCount (NUM_VERTICES), graph.edgeSet ().size ());
+		
+		System.out.println (graph);
 	}
-
 }
