@@ -65,5 +65,5 @@ class NearestNeighbourTest {
 		Graph<String, CustomEdge> result = nn.getTour ("A");
 		assertNotNull (result);
 		assertEquals (expectedTour, result);
-	}
+	}		
 }

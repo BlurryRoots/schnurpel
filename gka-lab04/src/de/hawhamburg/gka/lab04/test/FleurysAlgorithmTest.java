@@ -2,17 +2,14 @@ package de.hawhamburg.gka.lab04.test;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.jgrapht.Graph;
 import org.jgrapht.UndirectedGraph;
+import org.jgrapht.graph.Multigraph;
 import org.jgrapht.graph.SimpleGraph;
 import org.junit.Before;
 import org.junit.Test;
 
 import de.hawhamburg.gka.common.CustomEdge;
-import de.hawhamburg.gka.common.GraphParser;
 import de.hawhamburg.gka.lab04.FleurysAlgorithm;
 
 public class FleurysAlgorithmTest {
@@ -24,6 +21,11 @@ public class FleurysAlgorithmTest {
 	throws Exception {
 		expectedResult = 
 			new SimpleGraph<String, CustomEdge> (CustomEdge.class);
+		expectedResult.addVertex ("A");
+		expectedResult.addVertex ("B");
+		expectedResult.addVertex ("C");
+		expectedResult.addVertex ("D");
+		expectedResult.addVertex ("E");
 	}
 	
 	@Test public
@@ -34,7 +36,7 @@ public class FleurysAlgorithmTest {
 	@Test public
 	void testAnotherGraph () {
 		UndirectedGraph<String, CustomEdge> graph = 
-				new SimpleGraph<String, CustomEdge> (CustomEdge.class);
+			new Multigraph<String, CustomEdge> (CustomEdge.class);
 		
 		graph.addVertex ("A");
 		graph.addVertex ("B");
@@ -51,7 +53,7 @@ public class FleurysAlgorithmTest {
 		graph.addEdge ("B", "C", new CustomEdge (7));
 		graph.addEdge ("B", "C", new CustomEdge (7));
 		
-		FleurysAlgorithm fa = new FleurysAlgorithm ();		
+		FleurysAlgorithm fa = new FleurysAlgorithm ();	
 		assertEquals (expectedResult, fa.fleurysAlgorithm (graph, "A"));
 	}
 }
