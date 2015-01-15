@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.util.Iterator;
+import java.util.Random;
 import java.util.Set;
 
 import org.jgrapht.Graph;
@@ -32,8 +33,9 @@ class NearestNeighbourIntegrationTest {
 
 	@Test public
 	void test () {
-		final int SEED = 1337;
-		final int WEIGHT = 123;
+//		final int SEED = 1337;
+		final int SEED = (int)System.currentTimeMillis ();
+		final int WEIGHT = new Random (SEED).nextInt (1337) + 10;
 		final int VCOUNT = 24;
 		final String START = "v1";
 		
