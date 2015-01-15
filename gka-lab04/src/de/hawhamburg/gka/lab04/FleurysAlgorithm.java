@@ -1,7 +1,10 @@
 package de.hawhamburg.gka.lab04;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import org.jgrapht.Graph;
 import org.jgrapht.UndirectedGraph;
@@ -81,5 +84,59 @@ public class FleurysAlgorithm {
 		}
 		
 		return result;
+	}
+	
+	public
+	List<String> fleurysAlgorithm2(UndirectedGraph<String, CustomEdge> graph, String startingpoint){
+		
+		List<String> verticiesRoute = new ArrayList<String>();  		//returnwert liste von vertexes, wie sie nacheinander abgelaufen werden
+		String nextVertex = startingpoint;
+		boolean checkForBridges = true;									//nachdem eine kante gegangen ist, wird diese danach gel�sch, es m�ssen danach denoch alle kanten ablaufbar bleiben
+
+		CustomEdge edge = new CustomEdge();
+		  
+		while(graph.vertexSet().size() > 1){							//der Algorithmus ist beendet, sobald alle Kanten abgelaufen sind, ich l�sche im Algorithmus auch die Knoten, die keine Kanten mehr haben
+																		//wenn also nur noch ein Knoten vorhanden ist, der Anfangs- / Zielknote, dann kann die Schleife verlassen werden.
+			
+			LinkedList<CustomEdge> edgesList = new LinkedList<CustomEdge>(graph.edgesOf(nextVertex)); //hole alle dem Knoten zugeh�rigen Kanten  
+			
+			//Choose an edge which does not disconnect the graph after it is removed
+			while(checkForBridges){
+
+				edge = (CustomEdge) edgesList.getFirst();				//nehme eine der Kanten aus der Liste		
+				
+				if(checkForBridges = edgeIsBridgeEdge(graph, edge)) 	//falls es eine Br�ckenkante ist, entferne die Kante aus der Liste der Kanten 
+					edgesList.removeFirst();
+			}
+			//---------------------------------------------------------------------
+			//System.out.println(edge);			
+			verticiesRoute.add(graph.getEdgeSource(edge).toString()); 	//f�ge der Route den Anfangsknoten der Kante, die gelaufen werden soll, hinzu
+	
+			nextVertex = graph.getEdgeTarget(edge).toString(); 			//mache "nextVertex" zum n�chsten Knoten, der betrachtet werden soll, f�r den n�chsten durchlauf
+		
+			Set<CustomEdge> numOfEdges = new HashSet<CustomEdge>();
+						
+			graph.removeEdge(edge);										//entferne die genutze Kante
+		
+			//has source vertex still edges, if not remove it
+			if((numOfEdges).size() == 0) 	//Falls der verlassene Knoten keine Kante mehr haben sollte, l�sche auch diesen
+				graph.removeVertex(graph.getEdgeSource(edge));
+		
+		}
+		
+		verticiesRoute.add(nextVertex);									//der letzte verbleibende Knoten wird der Liste hinzugef�gt
+		
+		return verticiesRoute;
+	}
+
+	private boolean edgeIsBridgeEdge(UndirectedGraph<String, CustomEdge> graph, CustomEdge edge) {
+		
+		Graph<String, CustomEdge> graphCopy = graph;
+		
+		graphCopy.removeEdge(edge);
+		
+		ConnectivityInspector<String,CustomEdge> newGraph = new ConnectivityInspector<String, CustomEdge>((UndirectedGraph<String, CustomEdge>) graphCopy);
+	
+		return newGraph.isGraphConnected();
 	}
 }
