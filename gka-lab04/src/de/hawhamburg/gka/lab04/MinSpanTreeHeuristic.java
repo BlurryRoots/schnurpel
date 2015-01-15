@@ -26,7 +26,7 @@ public class MinSpanTreeHeuristic {
 		
 		UndirectedGraph<String, CustomEdge> eulerscherGraph = createEulerGraph(minSpanTree);
 		
-		List<String> eulerCircuit = new ArrayList<String>(fleurys.fleurysAlgorithm(eulerscherGraph, startingpoint));
+		List<String> eulerCircuit = new ArrayList<String>(fleurys.fleurysAlgorithm(eulerscherGraph, startingpoint).vertexSet ());
 				
 		UndirectedGraph resultGraph = new SimpleGraph<String, CustomEdge>(CustomEdge.class);
 		
